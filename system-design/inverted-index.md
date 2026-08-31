@@ -34,3 +34,35 @@ Web search, document search, Elasticsearch-like systems.
 1. Why is it faster than scanning all documents? → Direct hash lookup, no full scan.
 2. Is the full search still O(1)? → No — postings list size k matters: O(1) + O(k).
 3. What changes if the index is not a hash table? → Lookup cost rises (e.g., tree → O(log n)).
+
+---
+
+# Posting List
+
+## Core Idea
+The list of documents associated with a particular term in an inverted index.
+
+| Term   | Posting List  |
+|--------|---------------|
+| apple  | [1, 3, 5, 8]  |
+| banana | [2, 3, 5, 9]  |
+| mango  | [1, 4, 7]     |
+
+- `apple`, `banana`, `mango` → terms
+- `[1, 3, 5, 8]` → posting list for "apple"
+- Each number → document ID
+
+Think of it as: **Term → Posting List**
+
+## In Real Engines
+A posting list can hold more than document IDs — it may also store:
+- **Term frequency** (how often the term appears in a doc)
+- **Positions** (where the term occurs within each doc)
+
+## Reading a Posting List
+`apple → [1, 3, 5, 8]` means documents **1, 3, 5, and 8** contain "apple".
+
+## Revision Questions
+1. What is a posting list? → The list of document IDs for a given term.
+2. What does `5` in `apple → [1, 3, 5, 8]` represent? → Document ID 5.
+3. What extra info can a posting list store? → Term frequency and positions.
