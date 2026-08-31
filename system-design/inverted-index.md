@@ -105,3 +105,66 @@ Posting Lists
 1. What does an analyzer do? → Turns raw text into searchable tokens.
 2. Name the steps. → Tokenization, lowercasing, stop-word removal, stemming/lemmatization.
 3. Where does it sit in the pipeline? → Between the document and the inverted index.
+
+---
+
+# Tokenization & Analysis Steps
+
+## Hierarchy
+```
+Raw text
+   ↓
+Tokenization
+   ↓
+Tokens
+   ↓
+Other analysis steps
+   ↓
+Indexed tokens
+```
+
+## Example
+`"I love system design"` → `["I", "love", "system", "design"]` (tokenization)
+Then optional: lowercasing, stop-word removal, etc.
+
+---
+
+# Query Analyzer Consistency
+
+## Core Idea
+The **query must go through the same analyzer as the documents** — otherwise the query looks for terms that don't exist in the index.
+
+## Example
+Document: `"The Apple Store"` → `["apple", "store"]`
+Query `"Apple Store"` must also become `["apple", "store"]` to match.
+
+> If the document analyzer lowercases `Apple` → `apple`, but the query analyzer doesn't, the query would try to find `Apple` — which isn't in the index → no match.
+
+## Revision Questions
+1. Why analyze the query with the same analyzer? → So query terms match the indexed terms (consistency).
+2. What breaks if they differ? → Queries miss matches (e.g., "Apple" vs "apple").
+
+---
+
+# Stemming
+
+## Core Idea
+Reduces a word to a common root-like **stem** so related word variations match during search.
+
+`connected`, `connecting`, `connection` → `connect`
+
+A search for `"connect"` can then match documents containing `"connecting"`.
+
+## Stemming ≠ Tokenization
+`"Users are running quickly"`
+
+| Tokenization   | Stemming        |
+|----------------|-----------------|
+| Users, are, running, quickly | user, are, run, quick |
+
+Exact result depends on the stemming algorithm.
+
+## Revision Questions
+1. What is stemming? → Reducing words to a common stem so variations match.
+2. How is it different from tokenization? → Tokenization splits words; stemming normalizes them to roots.
+3. Example? → connecting/connection/connected → connect.
