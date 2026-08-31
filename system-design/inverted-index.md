@@ -66,3 +66,42 @@ A posting list can hold more than document IDs — it may also store:
 1. What is a posting list? → The list of document IDs for a given term.
 2. What does `5` in `apple → [1, 3, 5, 8]` represent? → Document ID 5.
 3. What extra info can a posting list store? → Term frequency and positions.
+
+---
+
+# Analyzer
+
+## Core Idea
+Converts **raw text** into **searchable tokens**.
+
+```
+Input: "The Quick Brown Fox"
+            ↓
+Analyzer:  ["quick", "brown", "fox"]
+```
+
+## Steps an Analyzer May Perform
+- **Tokenization** — split text into words
+- **Lowercasing** — `Quick` → `quick`
+- **Stop-word removal** — `the` → removed
+- **Stemming/lemmatization** — `running` → `run` (config-dependent)
+
+## Pipeline
+```
+Document
+   ↓
+Analyzer
+   ↓
+Tokens
+   ↓
+Inverted Index
+   ↓
+Posting Lists
+```
+
+> Key insight: the analyzer determines **which tokens** get indexed — so it directly shapes search behavior (e.g., "Quick" and "quick" match after lowercasing).
+
+## Revision Questions
+1. What does an analyzer do? → Turns raw text into searchable tokens.
+2. Name the steps. → Tokenization, lowercasing, stop-word removal, stemming/lemmatization.
+3. Where does it sit in the pipeline? → Between the document and the inverted index.
