@@ -6,6 +6,7 @@ Revision-friendly notes. One file per topic, organized by subject.
 
 ### System Design
 - [Inverted Index](system-design/inverted-index.md)
+- [Backend for Frontend (BFF)](system-design/bff.md)
 
 ### Frontend
 - [Critical Rendering Path](frontend/critical-rendering-path.md)
