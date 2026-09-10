@@ -9,3 +9,4 @@ Revision-friendly notes. One file per topic, organized by subject.
 
 ### Frontend
 - [Critical Rendering Path](frontend/critical-rendering-path.md)
+- [FCP and LCP](frontend/fcp-and-lcp.md)
