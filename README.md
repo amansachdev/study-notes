@@ -13,6 +13,7 @@ Revision-friendly notes. One file per topic, organized by subject.
 - [Critical Rendering Path](frontend/critical-rendering-path.md)
 - [FCP and LCP](frontend/fcp-and-lcp.md)
 - [IndexedDB](frontend/indexeddb.md)
+- [Web Workers](frontend/web-workers.md)
 
 ### Deployment
 - [Nginx](deployment/nginx.md)
